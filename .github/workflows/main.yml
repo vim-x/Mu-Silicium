@@ -1,0 +1,36 @@
+name: Build UEFI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y pip git mono-devel build-essential lld uuid-dev nasm gcc-aarch64-linux-gnu python3 python3-git python3-pip gettext locales gnupg ca-certificates python3-venv git git-core clang llvm curl lld
+
+          
+      - name: Install requirements
+        run: | 
+          python3 -m pip install -r pip-requirements.txt --break-system-packages
+
+      - name: Building UEFI 
+        run: | 
+          chmod +x ./build_uefi.sh
+          bash ./build_uefi.sh -d tapas
+    
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build.tar.gz
