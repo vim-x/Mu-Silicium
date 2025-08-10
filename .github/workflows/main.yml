@@ -22,10 +22,13 @@ jobs:
           
       - name: Install requirements
         run: | 
+          cd Mu-Silicium
+          export CLANGPDB_AARCH64_PREFIX=aarch64-linux-gnu-
           python3 -m pip install -r pip-requirements.txt --break-system-packages
 
       - name: Building UEFI 
         run: | 
+          cd Mu-Silicium
           chmod +x ./build_uefi.sh
           bash ./build_uefi.sh -d tapas
     
