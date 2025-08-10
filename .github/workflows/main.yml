@@ -33,5 +33,9 @@ jobs:
           chmod +x ./build_uefi.sh
           bash ./build_uefi.sh -d tapas
     
-      - name: Upload Artifact
+      - name: Upload UEFI images
         uses: actions/upload-artifact@v4
+        with:
+          name: uefi-images
+          path: ./Mu-*
+          compression-level: 9
