@@ -22,6 +22,7 @@ jobs:
           
       - name: Install requirements
         run: | 
+          git clone https://github.com/vim-x/Mu-Silicium.git
           cd Mu-Silicium
           export CLANGPDB_AARCH64_PREFIX=aarch64-linux-gnu-
           python3 -m pip install -r pip-requirements.txt --break-system-packages
