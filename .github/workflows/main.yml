@@ -32,6 +32,9 @@ jobs:
           cd Mu-Silicium
           chmod +x ./build_uefi.sh
           bash ./build_uefi.sh -d tapas
+
+      - name: Compress
+        run: tar -czvf build.tar.gz
     
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
